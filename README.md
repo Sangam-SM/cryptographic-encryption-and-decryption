@@ -1,4 +1,4 @@
-# CryptoMagic 🔐
+# Cryptograpy encryption and decryption 🔐
 
 Hey there! This is my cool encryption tool that I made to help you send secret messages. It's super easy to use and looks pretty nice too!
 
