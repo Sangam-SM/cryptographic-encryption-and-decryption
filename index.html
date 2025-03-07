@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto Magic - Encryption & Decryption Tool</title>
+    <link rel="stylesheet" href="static/styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Crypto Magic</h1>
+            <p>Your Simple Encryption & Decryption Tool</p>
+        </header>
+
+        <div class="tabs">
+            <button class="tab-btn active" onclick="switchTab('encrypt')">Encrypt</button>
+            <button class="tab-btn" onclick="switchTab('decrypt')">Decrypt</button>
+            <button class="tab-btn" onclick="switchTab('about')">About</button>
+        </div>
+
+        <div id="encrypt" class="tab-content active">
+            <h2>Encrypt Your Message</h2>
+            <form action="/encrypt" method="post">
+                <div class="form-group">
+                    <label for="encrypt-text">Enter text to encrypt:</label>
+                    <textarea id="encrypt-text" name="text" rows="6" placeholder="Type your secret message here..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="encrypt-key">Enter your secret key:</label>
+                    <input type="password" id="encrypt-key" name="key" placeholder="Secret key">
+                </div>
+                <button type="submit" class="btn">Encrypt Message</button>
+            </form>
+            {% if encrypted_text %}
+            <div class="result">
+                <h3>Encrypted Result:</h3>
+                <div class="result-box">
+                    <p>{{ encrypted_text }}</p>
+                    <button onclick="copyToClipboard('{{ encrypted_text }}')" class="copy-btn">Copy</button>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+
+        <div id="decrypt" class="tab-content">
+            <h2>Decrypt Your Message</h2>
+            <form action="/decrypt" method="post">
+                <div class="form-group">
+                    <label for="decrypt-text">Enter text to decrypt:</label>
+                    <textarea id="decrypt-text" name="text" rows="6" placeholder="Paste encrypted message here..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="decrypt-key">Enter your secret key:</label>
+                    <input type="password" id="decrypt-key" name="key" placeholder="Secret key">
+                </div>
+                <button type="submit" class="btn">Decrypt Message</button>
+            </form>
+            {% if decrypted_text %}
+            <div class="result">
+                <h3>Decrypted Result:</h3>
+                <div class="result-box">
+                    <p>{{ decrypted_text }}</p>
+                    <button onclick="copyToClipboard('{{ decrypted_text }}')" class="copy-btn">Copy</button>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+
+        <div id="about" class="tab-content">
+            <h2>About Crypto Magic</h2>
+            <div class="about-content">
+                <p>Crypto Magic is a simple tool that lets you encrypt and decrypt messages using the Fernet symmetric encryption algorithm.</p>
+                <p>Features:</p>
+                <ul>
+                    <li>Strong encryption that keeps your messages secure</li>
+                    <li>Easy-to-use interface</li>
+                    <li>No data storage - your messages and keys aren't saved</li>
+                </ul>
+                <p>Created with SANGAM using Python Flask and HTML/CSS</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Crypto Magic | <a href="https://github.com/yourusername/crypto-magic">GitHub</a></p>
+    </footer>
+
+    <script>
+        function switchTab(tabName) {
+            // Hide all tab contents
+            const tabContents = document.getElementsByClassName('tab-content');
+            for (let i = 0; i < tabContents.length; i++) {
+                tabContents[i].classList.remove('active');
+            }
+            
+            // Remove active class from all tab buttons
+            const tabButtons = document.getElementsByClassName('tab-btn');
+            for (let i = 0; i < tabButtons.length; i++) {
+                tabButtons[i].classList.remove('active');
+            }
+            
+            // Show the selected tab content and add active class to the button
+            document.getElementById(tabName).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert('Copied to clipboard!');
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+            });
+        }
+    </script>
+</body>
+</html>
