@@ -13,8 +13,7 @@ Hey there! This is my cool encryption tool that I made to help you send secret m
 
 1. **Clone this repo**
    ```
-   git clone https://github.com/yourusername/crypto-magic.git
-   cd crypto-magic
+   git clone https://github.com/Sangam-SM/cryptographic-encryption-and-decryption
    ```
 
 2. **Set up a virtual environment**
@@ -84,4 +83,4 @@ crypto-magic/
 
 ---
 
-made by : Sangam
+made by : Sangam 🔥
